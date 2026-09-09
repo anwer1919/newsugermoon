@@ -8,7 +8,8 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setIsLoaded(true), 1500);
+    // زيادة وقت التحميل قليلاً لضمان ظهور اللوجو
+    setTimeout(() => setIsLoaded(true), 2000);
     
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') setIsDark(true);
@@ -40,21 +41,24 @@ export default function Home() {
     }
   }, [isDark]);
 
+  // المسارات هنا مباشرة بدون /images/ لتطابق ملفاتك الحالية في GitHub
   const products = [
-    { name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', price: '400 EGP', img: '/images/ginger-cookies.jpg', fallback: 'https://images.unsplash.com/photo-1499636136210-6f4391b9c433?w=600&h=400&fit=crop', msg: 'أريد طلب كوكيز الجنزبيل' },
-    { name: 'بوكس السعادة', nameEn: 'Happiness Box', price: '600 EGP', img: '/images/happiness-box.jpg', fallback: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&h=400&fit=crop', msg: 'أريد طلب بوكس السعادة' },
-    { name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', price: '380 EGP', img: '/images/a.png', fallback: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&h=400&fit=crop', msg: 'أريد طلب بسكويت سوداني' },
-    { name: 'معجنات فاخرة', nameEn: 'Premium Pastry', price: '450 EGP', img: '/images/23666866-1B7F-48B6-942F-109F3E69B892.PNG', fallback: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=600&h=400&fit=crop', msg: 'أريد طلب معجنات فاخرة' },
-    { name: 'حلوى مميزة', nameEn: 'Special Treat', price: '420 EGP', img: '/images/742496D0-2EC1-425D-9A92-6D2AD36D13D8 (2).PNG', fallback: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&h=400&fit=crop', msg: 'أريد طلب حلوى مميزة' },
-    { name: 'كيك حصري', nameEn: 'Exclusive Cake', price: '500 EGP', img: '/images/F44AAFC0-C3F0-49DC-B24C-5B29AA6C22AB.PNG', fallback: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop', msg: 'أريد طلب كيك حصري' }
+    { name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', price: '400 EGP', img: '/ginger-cookies.jpg', msg: 'أريد طلب كوكيز الجنزبيل' },
+    { name: 'بوكس السعادة', nameEn: 'Happiness Box', price: '600 EGP', img: '/happiness-box.jpg', msg: 'أريد طلب بوكس السعادة' },
+    { name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', price: '380 EGP', img: '/product-4.png', msg: 'أريد طلب بسكويت سوداني' },
+    { name: 'معجنات فاخرة', nameEn: 'Premium Pastry', price: '450 EGP', img: '/product-5.png', msg: 'أريد طلب معجنات فاخرة' },
+    { name: 'حلوى مميزة', nameEn: 'Special Treat', price: '420 EGP', img: '/product-6.png', msg: 'أريد طلب حلوى مميزة' },
   ];
 
   return (
     <main className="main-content">
-      {/* شاشة التحميل */}
+      {/* شاشة التحميل باللوجو */}
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
-        <img src="/images/logo.png" alt="Logo" className="preloader-logo" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
-        <div className="preloader-emoji" style={{display: 'none', fontSize: '4rem'}}>🌙</div>
+        <img 
+          src="/logo.png" 
+          alt="Sugar Moon Logo" 
+          className="preloader-logo" 
+        />
         <div className="preloader-text">Sugar<span>moon</span></div>
       </div>
 
@@ -67,7 +71,7 @@ export default function Home() {
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            <img src="/images/logo.png" alt="Logo" className="nav-logo-icon" onError={(e) => { e.target.style.display='none'; }} />
+            <img src="/logo.png" alt="Logo" className="nav-logo-icon" />
             <span className="nav-logo-text">Sugar<span>moon</span></span>
           </a>
           <ul className="nav-links">
@@ -127,7 +131,6 @@ export default function Home() {
                   src={product.img} 
                   alt={product.name} 
                   className="product-image"
-                  onError={(e) => { e.target.src = product.fallback; }}
                 />
                 <div className="product-price-tag">
                   <div className="price">{product.price}</div>
