@@ -6,10 +6,8 @@ export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // إخفاء شاشة التحميل بعد تحميل الصفحة
     setTimeout(() => setIsLoaded(true), 1500);
     
-    // إنشاء تأثير الفتات المتطاير (Floating Crumbs)
     const container = document.getElementById('crumbsContainer');
     if (container) {
       const colors = ['#E8D5B7', '#D4A843', '#C4A882', '#F0D68A', '#F5E6D3'];
@@ -26,7 +24,6 @@ export default function Home() {
       }
     }
 
-    // تأثير ظهور العناصر عند التمرير (Scroll Reveal)
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -36,7 +33,6 @@ export default function Home() {
     
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // تأثير شريط التنقل عند التمرير (Navbar Scroll)
     const handleScroll = () => {
       const navbar = document.getElementById('navbar');
       if (window.pageYOffset > 50) {
@@ -52,21 +48,23 @@ export default function Home() {
 
   return (
     <main className="main-content">
-      {/* شاشة التحميل */}
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
         <div className="preloader-logo">Sugar<span>moon</span></div>
         <div className="preloader-bread">🍞</div>
       </div>
 
-      {/* حاوية الفتات المتطاير */}
       <div className="crumbs-container" id="crumbsContainer"></div>
 
-      {/* شريط التنقل (Navbar) */}
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            {/* 👇 غير اسم الصورة هنا إذا كان اللوجو الخاص بك له اسم مختلف */}
-            <img src="/images/logo.png" alt="Sugar Moon Logo" className="nav-logo-icon" style={{objectFit: 'contain'}} />
+            {/* اللوجو - تأكد من الاسم */}
+            <img 
+              src="/images/logo.png" 
+              alt="Sugar Moon Logo" 
+              className="nav-logo-icon" 
+              style={{objectFit: 'contain', background: 'white', borderRadius: '12px', padding: '5px'}}
+            />
             <div className="nav-logo-text">Sugar<span>moon</span></div>
           </a>
           <ul className="nav-links">
@@ -82,19 +80,18 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* القسم الرئيسي (Hero Section) */}
       <section className="hero" id="home">
         <div className="hero-bg-pattern"></div>
         <div className="hero-glow"></div>
         <div className="hero-floating-items">
-          <div className="floating-item"></div>
+          <div className="floating-item">🍞</div>
           <div className="floating-item">🥐</div>
           <div className="floating-item">🍰</div>
         </div>
         <div className="hero-content">
           <div className="hero-badge"><span className="dot"></span> متاح الآن للطلب</div>
           <h1 className="hero-title">
-            <span className="moon-icon">🌙</span> Sugar<span className="highlight">moon</span>
+            <span className="moon-icon"></span> Sugar<span className="highlight">moon</span>
           </h1>
           <p className="hero-subtitle">
             Taste of Home — Where Every Bite Feels Like Sudan
@@ -109,7 +106,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* قسم المنتجات */}
       <section className="section products-section" id="products">
         <div className="section-header reveal">
           <div className="section-label"><i className="fas fa-star"></i> منتجاتنا المميزة</div>
@@ -119,13 +115,12 @@ export default function Home() {
         
         <div className="products-grid">
           
-          {/* المنتج الأول: كوكيز الجنزبيل */}
+          {/* المنتج 1: كوكيز الجنزبيل */}
           <div className="product-card reveal reveal-delay-1">
             <div className="product-image-wrapper">
-              {/* 👇 غير اسم الصورة هنا (مثلاً: ginger-cookies.png أو ginger-cookies.jpeg) */}
               <img src="/images/ginger-cookies.jpg" alt="Ginger Cookies" className="product-image" />
               <div className="product-image-overlay"></div>
-              <div className="product-badge">الأكثر مبيعاً </div>
+              <div className="product-badge">الأكثر مبيعاً 🔥</div>
               <div className="product-price-tag">
                 <div className="price">400 EGP</div>
                 <div className="price-unit">/ كيلو واحد</div>
@@ -147,10 +142,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* المنتج الثاني: بوكس السعادة */}
+          {/* المنتج 2: بوكس السعادة */}
           <div className="product-card reveal reveal-delay-2">
             <div className="product-image-wrapper">
-              {/* 👇 غير اسم الصورة هنا */}
               <img src="/images/happiness-box.jpg" alt="Happiness Box" className="product-image" />
               <div className="product-image-overlay"></div>
               <div className="product-badge">عرض خاص 💛</div>
@@ -175,11 +169,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* المنتج الثالث: بسكويت سوداني */}
+          {/* المنتج 3: بسكويت سوداني */}
           <div className="product-card reveal reveal-delay-3">
             <div className="product-image-wrapper">
-              {/* 👇 غير اسم الصورة هنا */}
-              <img src="/images/sudanese-biscuits.jpg" alt="Sudanese Biscuits" className="product-image" />
+              <img src="/images/a.png" alt="Sudanese Biscuits" className="product-image" />
               <div className="product-image-overlay"></div>
               <div className="product-badge">تقليدي 🇸🇩</div>
               <div className="product-price-tag">
@@ -191,7 +184,7 @@ export default function Home() {
               </div>
             </div>
             <div className="product-info">
-              <div className="product-category"> BISCUITS</div>
+              <div className="product-category">🍘 BISCUITS</div>
               <h3 className="product-name">Sudanese Biscuits</h3>
               <div className="product-name-ar">بسكويت سوداني أصيل</div>
               <p className="product-desc">بسكويت سوداني تقليدي مقرمش بنكهة السمن البلدي الأصلي</p>
@@ -203,10 +196,90 @@ export default function Home() {
             </div>
           </div>
 
+          {/* المنتج 4: جديد */}
+          <div className="product-card reveal reveal-delay-1">
+            <div className="product-image-wrapper">
+              <img src="/images/product-4.png" alt="Product 4" className="product-image" />
+              <div className="product-image-overlay"></div>
+              <div className="product-badge">جديد ✨</div>
+              <div className="product-price-tag">
+                <div className="price">450 EGP</div>
+                <div className="price-unit">/ كيلو واحد</div>
+              </div>
+              <div className="product-qr">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الرابع" alt="QR" />
+              </div>
+            </div>
+            <div className="product-info">
+              <div className="product-category">🍰 SPECIAL</div>
+              <h3 className="product-name">Special Treat</h3>
+              <div className="product-name-ar">حلوى مميزة</div>
+              <p className="product-desc">حلوى سودانية فاخرة محضرة بأجود المكونات الطبيعية</p>
+              <div className="product-footer">
+                <a href="https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الرابع" className="product-order-btn" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-whatsapp"></i> اطلب الآن
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* المنتج 5: جديد */}
+          <div className="product-card reveal reveal-delay-2">
+            <div className="product-image-wrapper">
+              <img src="/images/product-5.png" alt="Product 5" className="product-image" />
+              <div className="product-image-overlay"></div>
+              <div className="product-badge">مميز </div>
+              <div className="product-price-tag">
+                <div className="price">420 EGP</div>
+                <div className="price-unit">/ كيلو واحد</div>
+              </div>
+              <div className="product-qr">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الخامس" alt="QR" />
+              </div>
+            </div>
+            <div className="product-info">
+              <div className="product-category"> PASTRY</div>
+              <h3 className="product-name">Premium Pastry</h3>
+              <div className="product-name-ar">معجنات فاخرة</div>
+              <p className="product-desc">معجنات سودانية تقليدية بنكهة لا تُنسى وجودة عالية</p>
+              <div className="product-footer">
+                <a href="https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الخامس" className="product-order-btn" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-whatsapp"></i> اطلب الآن
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* المنتج 6: جديد */}
+          <div className="product-card reveal reveal-delay-3">
+            <div className="product-image-wrapper">
+              <img src="/images/product-6.png" alt="Product 6" className="product-image" />
+              <div className="product-image-overlay"></div>
+              <div className="product-badge">حصري 🌟</div>
+              <div className="product-price-tag">
+                <div className="price">500 EGP</div>
+                <div className="price-unit">/ كيلو واحد</div>
+              </div>
+              <div className="product-qr">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20السادس" alt="QR" />
+              </div>
+            </div>
+            <div className="product-info">
+              <div className="product-category">🎂 CAKE</div>
+              <h3 className="product-name">Exclusive Cake</h3>
+              <div className="product-name-ar">كيك حصري</div>
+              <p className="product-desc">كيك سوداني فاخر للمناسبات الخاصة، محضر بعناية فائقة</p>
+              <div className="product-footer">
+                <a href="https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20السادس" className="product-order-btn" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-whatsapp"></i> اطلب الآن
+                </a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* الفوتر (Footer) */}
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-bottom">
@@ -216,7 +289,6 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* زر الواتساب العائم */}
       <div className="sticky-whatsapp">
         <span className="sticky-whatsapp-label">اطلب عبر واتساب 💬</span>
         <a href="https://wa.me/2012883541?text=مرحباً%20Sugarmoon!" className="sticky-whatsapp-btn" target="_blank" rel="noopener noreferrer">
