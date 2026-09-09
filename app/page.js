@@ -40,29 +40,22 @@ export default function Home() {
     }
   }, [isDark]);
 
-  // المسارات هنا يجب أن تطابق أسماء الملفات في GitHub حرفياً (حروف صغيرة)
+  // نستخدم الروابط المباشرة من GitHub لضمان عدم حدوث 404
+  const logoUrl = "https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public/logo.png";
+  
   const products = [
-    { name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', price: '400 EGP', img: '/ginger-cookies.jpg', msg: 'أريد طلب كوكيز الجنزبيل' },
-    { name: 'بوكس السعادة', nameEn: 'Happiness Box', price: '600 EGP', img: '/happiness-box.jpg', msg: 'أريد طلب بوكس السعادة' },
-    { name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', price: '380 EGP', img: '/product-4.png', msg: 'أريد طلب بسكويت سوداني' },
-    { name: 'معجنات فاخرة', nameEn: 'Premium Pastry', price: '450 EGP', img: '/product-5.png', msg: 'أريد طلب معجنات فاخرة' },
-    { name: 'حلوى مميزة', nameEn: 'Special Treat', price: '420 EGP', img: '/product-6.png', msg: 'أريد طلب حلوى مميزة' },
+    { name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', price: '400 EGP', img: 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public/ginger-cookies.jpg', msg: 'أريد طلب كوكيز الجنزبيل' },
+    { name: 'بوكس السعادة', nameEn: 'Happiness Box', price: '600 EGP', img: 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public/happiness-box.jpg', msg: 'أريد طلب بوكس السعادة' },
+    { name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', price: '380 EGP', img: 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public/product-4.png', msg: 'أريد طلب بسكويت سوداني' },
+    { name: 'معجنات فاخرة', nameEn: 'Premium Pastry', price: '450 EGP', img: 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public/product-5.png', msg: 'أريد طلب معجنات فاخرة' },
+    { name: 'حلوى مميزة', nameEn: 'Special Treat', price: '420 EGP', img: 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public/product-6.png', msg: 'أريد طلب حلوى مميزة' },
   ];
 
   return (
     <main className="main-content">
       {/* شاشة التحميل */}
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
-        <img 
-          src="/logo.png" 
-          alt="Sugar Moon Logo" 
-          className="preloader-logo" 
-          onError={(e) => {
-            e.target.style.display = 'none';
-            e.target.nextElementSibling.style.display = 'flex';
-          }}
-        />
-        <div className="preloader-fallback" style={{display: 'none'}}>🌙</div>
+        <img src={logoUrl} alt="Logo" className="preloader-logo" />
         <div className="preloader-text">Sugar<span>moon</span></div>
       </div>
 
@@ -75,13 +68,7 @@ export default function Home() {
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            <img 
-              src="/logo.png" 
-              alt="Logo" 
-              className="nav-logo-icon" 
-              onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'block'; }}
-            />
-            <span className="nav-logo-fallback" style={{display: 'none', fontSize: '1.5rem'}}>🌙</span>
+            <img src={logoUrl} alt="Logo" className="nav-logo-icon" />
             <span className="nav-logo-text">Sugar<span>moon</span></span>
           </a>
           <ul className="nav-links">
@@ -137,21 +124,7 @@ export default function Home() {
           {products.map((product, index) => (
             <div key={index} className={`product-card reveal reveal-delay-${(index % 3) + 1}`}>
               <div className="product-image-wrapper">
-                <img 
-                  src={product.img} 
-                  alt={product.name} 
-                  className="product-image"
-                  onError={(e) => {
-                    // إذا فشلت الصورة، أخفِها وأظهر النص الاحتياطي
-                    e.target.style.display = 'none';
-                    e.target.nextElementSibling.style.display = 'flex';
-                  }}
-                />
-                {/* عنصر احتياطي يظهر إذا فشلت الصورة */}
-                <div className="image-fallback" style={{display: 'none'}}>
-                  <span>📷 {product.name}</span>
-                </div>
-                
+                <img src={product.img} alt={product.name} className="product-image" />
                 <div className="product-price-tag">
                   <div className="price">{product.price}</div>
                 </div>
