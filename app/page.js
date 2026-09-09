@@ -1,13 +1,15 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    // إخفاء شاشة التحميل بعد تحميل الصفحة
+    setTimeout(() => setIsLoaded(true), 1500);
     
-    // Floating crumbs logic
+    // إنشاء تأثير الفتات المتطاير (Floating Crumbs)
     const container = document.getElementById('crumbsContainer');
     if (container) {
       const colors = ['#E8D5B7', '#D4A843', '#C4A882', '#F0D68A', '#F5E6D3'];
@@ -24,38 +26,47 @@ export default function Home() {
       }
     }
 
-    // Scroll reveal logic
+    // تأثير ظهور العناصر عند التمرير (Scroll Reveal)
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('active');
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Navbar scroll logic
+    // تأثير شريط التنقل عند التمرير (Navbar Scroll)
     const handleScroll = () => {
       const navbar = document.getElementById('navbar');
-      if (window.pageYOffset > 50) navbar?.classList.add('scrolled');
-      else navbar?.classList.remove('scrolled');
+      if (window.pageYOffset > 50) {
+        navbar?.classList.add('scrolled');
+      } else {
+        navbar?.classList.remove('scrolled');
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <main className="main-content">
+      {/* شاشة التحميل */}
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
         <div className="preloader-logo">Sugar<span>moon</span></div>
         <div className="preloader-bread">🍞</div>
       </div>
 
+      {/* حاوية الفتات المتطاير */}
       <div className="crumbs-container" id="crumbsContainer"></div>
 
+      {/* شريط التنقل (Navbar) */}
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            <div className="nav-logo-icon">🌙</div>
+            {/* 👇 غير اسم الصورة هنا إذا كان اللوجو الخاص بك له اسم مختلف */}
+            <img src="/images/logo.png" alt="Sugar Moon Logo" className="nav-logo-icon" style={{objectFit: 'contain'}} />
             <div className="nav-logo-text">Sugar<span>moon</span></div>
           </a>
           <ul className="nav-links">
@@ -71,17 +82,20 @@ export default function Home() {
         </div>
       </nav>
 
+      {/* القسم الرئيسي (Hero Section) */}
       <section className="hero" id="home">
         <div className="hero-bg-pattern"></div>
         <div className="hero-glow"></div>
         <div className="hero-floating-items">
-          <div className="floating-item">🍞</div>
+          <div className="floating-item"></div>
           <div className="floating-item">🥐</div>
           <div className="floating-item">🍰</div>
         </div>
         <div className="hero-content">
           <div className="hero-badge"><span className="dot"></span> متاح الآن للطلب</div>
-          <h1 className="hero-title"><span className="moon-icon">🌙</span> Sugar<span className="highlight">moon</span></h1>
+          <h1 className="hero-title">
+            <span className="moon-icon">🌙</span> Sugar<span className="highlight">moon</span>
+          </h1>
           <p className="hero-subtitle">
             Taste of Home — Where Every Bite Feels Like Sudan
             <span className="arabic">طعم البيت — كل لقمة تحكي قصة وطن 🇸🇩</span>
@@ -95,19 +109,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* قسم المنتجات */}
       <section className="section products-section" id="products">
         <div className="section-header reveal">
           <div className="section-label"><i className="fas fa-star"></i> منتجاتنا المميزة</div>
           <h2 className="section-title">Our <span className="gold">Signature</span> Bakes</h2>
           <p className="section-desc">كل منتج مصنوع بحب وعناية، كأنك في بيتك بالسودان 🏡</p>
         </div>
+        
         <div className="products-grid">
-          {/* Product 1 */}
+          
+          {/* المنتج الأول: كوكيز الجنزبيل */}
           <div className="product-card reveal reveal-delay-1">
             <div className="product-image-wrapper">
+              {/* 👇 غير اسم الصورة هنا (مثلاً: ginger-cookies.png أو ginger-cookies.jpeg) */}
               <img src="/images/ginger-cookies.jpg" alt="Ginger Cookies" className="product-image" />
               <div className="product-image-overlay"></div>
-              <div className="product-badge">الأكثر مبيعاً 🔥</div>
+              <div className="product-badge">الأكثر مبيعاً </div>
               <div className="product-price-tag">
                 <div className="price">400 EGP</div>
                 <div className="price-unit">/ كيلو واحد</div>
@@ -129,9 +147,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Product 2 */}
+          {/* المنتج الثاني: بوكس السعادة */}
           <div className="product-card reveal reveal-delay-2">
             <div className="product-image-wrapper">
+              {/* 👇 غير اسم الصورة هنا */}
               <img src="/images/happiness-box.jpg" alt="Happiness Box" className="product-image" />
               <div className="product-image-overlay"></div>
               <div className="product-badge">عرض خاص 💛</div>
@@ -156,9 +175,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Product 3 */}
+          {/* المنتج الثالث: بسكويت سوداني */}
           <div className="product-card reveal reveal-delay-3">
             <div className="product-image-wrapper">
+              {/* 👇 غير اسم الصورة هنا */}
               <img src="/images/sudanese-biscuits.jpg" alt="Sudanese Biscuits" className="product-image" />
               <div className="product-image-overlay"></div>
               <div className="product-badge">تقليدي 🇸🇩</div>
@@ -171,7 +191,7 @@ export default function Home() {
               </div>
             </div>
             <div className="product-info">
-              <div className="product-category">🍘 BISCUITS</div>
+              <div className="product-category"> BISCUITS</div>
               <h3 className="product-name">Sudanese Biscuits</h3>
               <div className="product-name-ar">بسكويت سوداني أصيل</div>
               <p className="product-desc">بسكويت سوداني تقليدي مقرمش بنكهة السمن البلدي الأصلي</p>
@@ -182,9 +202,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
+      {/* الفوتر (Footer) */}
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-bottom">
@@ -194,6 +216,7 @@ export default function Home() {
         </div>
       </footer>
 
+      {/* زر الواتساب العائم */}
       <div className="sticky-whatsapp">
         <span className="sticky-whatsapp-label">اطلب عبر واتساب 💬</span>
         <a href="https://wa.me/2012883541?text=مرحباً%20Sugarmoon!" className="sticky-whatsapp-btn" target="_blank" rel="noopener noreferrer">
