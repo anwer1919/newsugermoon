@@ -58,12 +58,11 @@ export default function Home() {
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            {/* اللوجو - تأكد من الاسم */}
             <img 
               src="/images/logo.png" 
-              alt="Sugar Moon Logo" 
-              className="nav-logo-icon" 
-              style={{objectFit: 'contain', background: 'white', borderRadius: '12px', padding: '5px'}}
+              alt="Sugar Moon" 
+              className="nav-logo-icon"
+              onError={(e) => { e.target.src = 'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=SugarMoon'; }}
             />
             <div className="nav-logo-text">Sugar<span>moon</span></div>
           </a>
@@ -115,25 +114,30 @@ export default function Home() {
         
         <div className="products-grid">
           
-          {/* المنتج 1: كوكيز الجنزبيل */}
+          {/* المنتج 1 */}
           <div className="product-card reveal reveal-delay-1">
             <div className="product-image-wrapper">
-              <img src="/images/ginger-cookies.jpg" alt="Ginger Cookies" className="product-image" />
+              <img 
+                src="/images/ginger-cookies.jpg" 
+                alt="Ginger Cookies" 
+                className="product-image"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <div className="product-image-overlay"></div>
               <div className="product-badge">الأكثر مبيعاً 🔥</div>
               <div className="product-price-tag">
                 <div className="price">400 EGP</div>
-                <div className="price-unit">/ كيلو واحد</div>
+                <div className="price-unit">/ كيلو</div>
               </div>
               <div className="product-qr">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20كوكيز%20الجنزبيل" alt="QR" />
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541" alt="QR" />
               </div>
             </div>
             <div className="product-info">
               <div className="product-category">🍪 COOKIES</div>
               <h3 className="product-name">Ginger Cookies</h3>
               <div className="product-name-ar">كوكيز الجنزبيل</div>
-              <p className="product-desc">كوكيز سوداني بالزنجبيل والقرفة، مقرمش من الخارج وطري من الداخل</p>
+              <p className="product-desc">كوكيز سوداني بالزنجبيل والقرفة، مقرمش وطري</p>
               <div className="product-footer">
                 <a href="https://wa.me/2012883541?text=أريد%20طلب%20كوكيز%20الجنزبيل" className="product-order-btn" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-whatsapp"></i> اطلب الآن
@@ -142,25 +146,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* المنتج 2: بوكس السعادة */}
+          {/* المنتج 2 */}
           <div className="product-card reveal reveal-delay-2">
             <div className="product-image-wrapper">
-              <img src="/images/happiness-box.jpg" alt="Happiness Box" className="product-image" />
+              <img 
+                src="/images/happiness-box.jpg" 
+                alt="Happiness Box" 
+                className="product-image"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <div className="product-image-overlay"></div>
               <div className="product-badge">عرض خاص 💛</div>
               <div className="product-price-tag">
                 <div className="price">600 EGP</div>
-                <div className="price-unit">/ بوكس 1 كيلو</div>
+                <div className="price-unit">/ بوكس</div>
               </div>
               <div className="product-qr">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20بوكس%20السعاده" alt="QR" />
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541" alt="QR" />
               </div>
             </div>
             <div className="product-info">
               <div className="product-category">🎁 BOX SET</div>
               <h3 className="product-name">Happiness Box</h3>
               <div className="product-name-ar">بوكس السعادة</div>
-              <p className="product-desc">تشكيلة فاخرة من الكوكيز والبسكويت السوداني في بوكس هدية أنيق</p>
+              <p className="product-desc">تشكيلة فاخرة من الكوكيز والبسكويت السوداني</p>
               <div className="product-footer">
                 <a href="https://wa.me/2012883541?text=أريد%20طلب%20بوكس%20السعاده" className="product-order-btn" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-whatsapp"></i> اطلب الآن
@@ -169,25 +178,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* المنتج 3: بسكويت سوداني */}
+          {/* المنتج 3 */}
           <div className="product-card reveal reveal-delay-3">
             <div className="product-image-wrapper">
-              <img src="/images/a.png" alt="Sudanese Biscuits" className="product-image" />
+              <img 
+                src="/images/a.png" 
+                alt="Sudanese Biscuits" 
+                className="product-image"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <div className="product-image-overlay"></div>
               <div className="product-badge">تقليدي 🇸🇩</div>
               <div className="product-price-tag">
                 <div className="price">380 EGP</div>
-                <div className="price-unit">/ كيلو واحد</div>
+                <div className="price-unit">/ كيلو</div>
               </div>
               <div className="product-qr">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20بسكويت%20سوداني" alt="QR" />
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541" alt="QR" />
               </div>
             </div>
             <div className="product-info">
               <div className="product-category">🍘 BISCUITS</div>
               <h3 className="product-name">Sudanese Biscuits</h3>
               <div className="product-name-ar">بسكويت سوداني أصيل</div>
-              <p className="product-desc">بسكويت سوداني تقليدي مقرمش بنكهة السمن البلدي الأصلي</p>
+              <p className="product-desc">بسكويت سوداني تقليدي مقرمش بنكهة السمن البلدي</p>
               <div className="product-footer">
                 <a href="https://wa.me/2012883541?text=أريد%20طلب%20بسكويت%20سوداني" className="product-order-btn" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-whatsapp"></i> اطلب الآن
@@ -196,25 +210,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* المنتج 4: جديد */}
+          {/* المنتج 4 */}
           <div className="product-card reveal reveal-delay-1">
             <div className="product-image-wrapper">
-              <img src="/images/product-4.png" alt="Product 4" className="product-image" />
+              <img 
+                src="/images/23666866-1B7F-48B6-942F-109F3E69B892.PNG" 
+                alt="Product 4" 
+                className="product-image"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <div className="product-image-overlay"></div>
               <div className="product-badge">جديد ✨</div>
               <div className="product-price-tag">
                 <div className="price">450 EGP</div>
-                <div className="price-unit">/ كيلو واحد</div>
+                <div className="price-unit">/ كيلو</div>
               </div>
               <div className="product-qr">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الرابع" alt="QR" />
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541" alt="QR" />
               </div>
             </div>
             <div className="product-info">
               <div className="product-category">🍰 SPECIAL</div>
               <h3 className="product-name">Special Treat</h3>
               <div className="product-name-ar">حلوى مميزة</div>
-              <p className="product-desc">حلوى سودانية فاخرة محضرة بأجود المكونات الطبيعية</p>
+              <p className="product-desc">حلوى سودانية فاخرة بأجود المكونات الطبيعية</p>
               <div className="product-footer">
                 <a href="https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الرابع" className="product-order-btn" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-whatsapp"></i> اطلب الآن
@@ -223,25 +242,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* المنتج 5: جديد */}
+          {/* المنتج 5 */}
           <div className="product-card reveal reveal-delay-2">
             <div className="product-image-wrapper">
-              <img src="/images/product-5.png" alt="Product 5" className="product-image" />
+              <img 
+                src="/images/742496D0-2EC1-425D-9A92-6D2AD36D13D8 (2).PNG" 
+                alt="Product 5" 
+                className="product-image"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <div className="product-image-overlay"></div>
               <div className="product-badge">مميز </div>
               <div className="product-price-tag">
                 <div className="price">420 EGP</div>
-                <div className="price-unit">/ كيلو واحد</div>
+                <div className="price-unit">/ كيلو</div>
               </div>
               <div className="product-qr">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الخامس" alt="QR" />
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541" alt="QR" />
               </div>
             </div>
             <div className="product-info">
-              <div className="product-category"> PASTRY</div>
+              <div className="product-category">🥐 PASTRY</div>
               <h3 className="product-name">Premium Pastry</h3>
               <div className="product-name-ar">معجنات فاخرة</div>
-              <p className="product-desc">معجنات سودانية تقليدية بنكهة لا تُنسى وجودة عالية</p>
+              <p className="product-desc">معجنات سودانية تقليدية بنكهة لا تُنسى</p>
               <div className="product-footer">
                 <a href="https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20الخامس" className="product-order-btn" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-whatsapp"></i> اطلب الآن
@@ -250,25 +274,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* المنتج 6: جديد */}
+          {/* المنتج 6 */}
           <div className="product-card reveal reveal-delay-3">
             <div className="product-image-wrapper">
-              <img src="/images/product-6.png" alt="Product 6" className="product-image" />
+              <img 
+                src="/images/F44AAFC0-C3F0-49DC-B24C-5B29AA6C22AB.PNG" 
+                alt="Product 6" 
+                className="product-image"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <div className="product-image-overlay"></div>
               <div className="product-badge">حصري 🌟</div>
               <div className="product-price-tag">
                 <div className="price">500 EGP</div>
-                <div className="price-unit">/ كيلو واحد</div>
+                <div className="price-unit">/ كيلو</div>
               </div>
               <div className="product-qr">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20السادس" alt="QR" />
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://wa.me/2012883541" alt="QR" />
               </div>
             </div>
             <div className="product-info">
-              <div className="product-category">🎂 CAKE</div>
+              <div className="product-category"> CAKE</div>
               <h3 className="product-name">Exclusive Cake</h3>
               <div className="product-name-ar">كيك حصري</div>
-              <p className="product-desc">كيك سوداني فاخر للمناسبات الخاصة، محضر بعناية فائقة</p>
+              <p className="product-desc">كيك سوداني فاخر للمناسبات الخاصة</p>
               <div className="product-footer">
                 <a href="https://wa.me/2012883541?text=أريد%20طلب%20المنتج%20السادس" className="product-order-btn" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-whatsapp"></i> اطلب الآن
@@ -284,7 +313,7 @@ export default function Home() {
         <div className="footer-container">
           <div className="footer-bottom">
             <div className="footer-copyright">© 2026 <strong>AnwerAhmed</strong> — All Rights Reserved</div>
-            <div className="footer-made-with">Made with <span className="heart">❤️</span> for Sudanese in Egypt 🇸🇩🇪🇬</div>
+            <div className="footer-made-with">Made with <span className="heart">❤️</span> for Sudanese in Egypt 🇩🇪🇬</div>
           </div>
         </div>
       </footer>
