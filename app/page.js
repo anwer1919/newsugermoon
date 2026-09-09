@@ -8,7 +8,6 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // زيادة وقت التحميل قليلاً لضمان ظهور اللوجو
     setTimeout(() => setIsLoaded(true), 2000);
     
     const savedTheme = localStorage.getItem('theme');
@@ -41,7 +40,7 @@ export default function Home() {
     }
   }, [isDark]);
 
-  // المسارات هنا مباشرة بدون /images/ لتطابق ملفاتك الحالية في GitHub
+  // المسارات هنا يجب أن تطابق أسماء الملفات في GitHub حرفياً (حروف صغيرة)
   const products = [
     { name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', price: '400 EGP', img: '/ginger-cookies.jpg', msg: 'أريد طلب كوكيز الجنزبيل' },
     { name: 'بوكس السعادة', nameEn: 'Happiness Box', price: '600 EGP', img: '/happiness-box.jpg', msg: 'أريد طلب بوكس السعادة' },
@@ -52,13 +51,18 @@ export default function Home() {
 
   return (
     <main className="main-content">
-      {/* شاشة التحميل باللوجو */}
+      {/* شاشة التحميل */}
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
         <img 
           src="/logo.png" 
           alt="Sugar Moon Logo" 
           className="preloader-logo" 
+          onError={(e) => {
+            e.target.style.display = 'none';
+            e.target.nextElementSibling.style.display = 'flex';
+          }}
         />
+        <div className="preloader-fallback" style={{display: 'none'}}>🌙</div>
         <div className="preloader-text">Sugar<span>moon</span></div>
       </div>
 
@@ -71,7 +75,13 @@ export default function Home() {
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            <img src="/logo.png" alt="Logo" className="nav-logo-icon" />
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="nav-logo-icon" 
+              onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'block'; }}
+            />
+            <span className="nav-logo-fallback" style={{display: 'none', fontSize: '1.5rem'}}>🌙</span>
             <span className="nav-logo-text">Sugar<span>moon</span></span>
           </a>
           <ul className="nav-links">
@@ -131,7 +141,17 @@ export default function Home() {
                   src={product.img} 
                   alt={product.name} 
                   className="product-image"
+                  onError={(e) => {
+                    // إذا فشلت الصورة، أخفِها وأظهر النص الاحتياطي
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
                 />
+                {/* عنصر احتياطي يظهر إذا فشلت الصورة */}
+                <div className="image-fallback" style={{display: 'none'}}>
+                  <span>📷 {product.name}</span>
+                </div>
+                
                 <div className="product-price-tag">
                   <div className="price">{product.price}</div>
                 </div>
