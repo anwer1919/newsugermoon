@@ -10,7 +10,6 @@ export default function Home() {
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 2500);
-    
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') setIsDark(true);
 
@@ -41,7 +40,6 @@ export default function Home() {
     }
   }, [isDark]);
 
-  //  جميع المنتجات التسعة
   const products = [
     { id: 1, name: 'المنتج الأول', img: '/product-1.png', msg: 'مرحباً، أريد الاستفسار عن المنتج الأول' },
     { id: 2, name: 'المنتج الثاني', img: '/product-2.png', msg: 'مرحباً، أريد الاستفسار عن المنتج الثاني' },
@@ -56,23 +54,18 @@ export default function Home() {
 
   return (
     <main className="main-content">
-      {/* خلفية 3D متحركة */}
-      <div className="bg-3d-animation">
-        <div className="floating-shape shape-1"></div>
-        <div className="floating-shape shape-2"></div>
-        <div className="floating-shape shape-3"></div>
-        <div className="floating-shape shape-4"></div>
-        <div className="floating-shape shape-5"></div>
-        <div className="floating-shape shape-6"></div>
+      {/* خلفية 3D سينمائية */}
+      <div className="cinematic-bg">
+        <div className="orb orb-1"></div>
+        <div className="orb orb-2"></div>
+        <div className="orb orb-3"></div>
       </div>
 
-      {/* شاشة التحميل - لوجو كبير */}
+      {/* شاشة التحميل الفاخرة */}
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
-        <img src="/logo.png" alt="Sugar Moon Logo" className="preloader-logo-large" />
+        <img src="/logo.png" alt="Sugar Moon" className="preloader-logo" />
         <div className="preloader-text">Sugar<span>moon</span></div>
-        <div className="preloader-dots">
-          <span></span><span></span><span></span>
-        </div>
+        <div className="preloader-line"><span></span></div>
       </div>
 
       {/* زر الوضع الليلي */}
@@ -89,10 +82,11 @@ export default function Home() {
           </a>
           <ul className="nav-links">
             <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#products">المنتجات</a></li>
+            <li><a href="#products">المجموعة الفاخرة</a></li>
+            <li><a href="#footer">تواصل معنا</a></li>
           </ul>
           <div className="nav-actions">
-            <a href="https://wa.me/2012883541" className="nav-whatsapp-btn" target="_blank">💬 اطلب الآن</a>
+            <a href="https://wa.me/249912883541" className="nav-whatsapp-btn" target="_blank">💬 اطلب الآن</a>
             <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(true)}>☰</button>
           </div>
         </div>
@@ -104,10 +98,10 @@ export default function Home() {
           <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
             <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>✕</button>
             <ul className="mobile-menu-links">
-              <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>🏠 الرئيسية</a></li>
-              <li><a href="#products" onClick={() => setMobileMenuOpen(false)}>🍞 المنتجات</a></li>
+              <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>الرئيسية</a></li>
+              <li><a href="#products" onClick={() => setMobileMenuOpen(false)}>المجموعة الفاخرة</a></li>
             </ul>
-            <a href="https://wa.me/2012883541" className="mobile-whatsapp-btn" target="_blank">💬 اطلب عبر واتساب</a>
+            <a href="https://wa.me/249912883541" className="mobile-whatsapp-btn" target="_blank">💬 اطلب عبر واتساب</a>
           </div>
         </div>
       )}
@@ -115,15 +109,15 @@ export default function Home() {
       {/* الهيرو */}
       <section className="hero" id="home">
         <div className="hero-content">
-          <div className="hero-badge">🟢 متاح الآن للطلب</div>
+          <div className="hero-badge">✨ تجربة طعم لا تُنسى</div>
           <h1 className="hero-title">Sugar<span className="highlight">moon</span></h1>
           <p className="hero-subtitle">
-            Taste of Home — Where Every Bite Feels Like Sudan
-            <span className="arabic">طعم البيت — كل لقمة تحكي قصة وطن 🇩</span>
+            حيث يلتقي الأصالة بالفخامة
+            <span className="arabic">طعم البيت السوداني بلمسة عصرية فاخرة 🇸🇩</span>
           </p>
           <div className="hero-cta-group">
-            <a href="#products" className="btn-primary">🍞 استعرض المنتجات</a>
-            <a href="https://wa.me/2012883541" className="btn-secondary" target="_blank">💬 اطلب عبر واتساب</a>
+            <a href="#products" className="btn-luxury">استعرض المجموعة</a>
+            <a href="https://wa.me/249912883541" className="btn-outline" target="_blank">تواصل للطلب</a>
           </div>
         </div>
       </section>
@@ -131,8 +125,8 @@ export default function Home() {
       {/* المنتجات */}
       <section className="section products-section" id="products">
         <div className="section-header reveal">
-          <div className="section-label">⭐ منتجاتنا المميزة</div>
-          <h2 className="section-title">Our <span className="gold">Signature</span> Bakes</h2>
+          <div className="section-label">إبداعنا</div>
+          <h2 className="section-title">المجموعة <span className="gold">الحصرية</span></h2>
         </div>
         
         <div className="products-grid">
@@ -141,9 +135,9 @@ export default function Home() {
               <div className="product-image-wrapper" onClick={() => setSelectedProduct(product)}>
                 <img src={product.img} alt={product.name} className="product-image" />
                 <div className="product-overlay">
-                  <button className="product-order-btn-overlay" onClick={(e) => {
+                  <button className="btn-luxury-sm" onClick={(e) => {
                     e.stopPropagation();
-                    window.open(`https://wa.me/2012883541?text=${encodeURIComponent(product.msg)}`, '_blank');
+                    window.open(`https://wa.me/249912883541?text=${encodeURIComponent(product.msg)}`, '_blank');
                   }}>
                     💬 اطلب الآن
                   </button>
@@ -154,36 +148,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* النافذة المنبثقة */}
+      {/* النافذة المنبثقة الفاخرة */}
       {selectedProduct && (
         <div className="modal-overlay" onClick={() => setSelectedProduct(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setSelectedProduct(null)}>✕</button>
             <img src={selectedProduct.img} alt={selectedProduct.name} className="modal-image" />
             <h2 className="modal-title">{selectedProduct.name}</h2>
-            <a 
-              href={`https://wa.me/2012883541?text=${encodeURIComponent(selectedProduct.msg)}`} 
-              className="modal-order-btn" 
-              target="_blank"
-            >
+            <a href={`https://wa.me/249912883541?text=${encodeURIComponent(selectedProduct.msg)}`} className="btn-luxury modal-btn" target="_blank">
               💬 اطلب الآن عبر واتساب
             </a>
           </div>
         </div>
       )}
 
-      {/* الفوتر */}
-      <footer className="footer">
+      {/* الفوتر الفاخر */}
+      <footer className="footer" id="footer">
         <div className="footer-container">
+          <div className="footer-top">
+            <div className="footer-brand">
+              <img src="/logo.png" alt="Logo" className="footer-logo" />
+              <h3>Sugar<span>moon</span></h3>
+              <p>نقدم لكم أرقى المخبوزات والحلويات السودانية الأصيلة، محضرة بحب وعناية فائقة لننقل لكم طعم البيت في كل لقمة.</p>
+            </div>
+            <div className="footer-contact">
+              <h4>تواصل للطلبات</h4>
+              <a href="https://wa.me/249912883541" target="_blank" className="contact-link">
+                <span>📱</span> 00249912883541
+              </a>
+              <div className="social-links">
+                <a href="#" className="social-icon">📘</a>
+                <a href="#" className="social-icon">📸</a>
+                <a href="#" className="social-icon">🎵</a>
+              </div>
+            </div>
+          </div>
           <div className="footer-bottom">
-            <div>© 2026 <strong>AnwerAhmed</strong></div>
-            <div>Made with ❤️ for Sudanese in Egypt 🇸🇩🇪</div>
+            <div className="copyright">
+              © 2026 <strong>AnwerAhmed</strong>. جميع الحقوق محفوظة.
+            </div>
+            <div className="developer-info">
+              تطوير وتصميم بواسطة <strong>AnwerAhmed</strong> | 
+              <a href="https://wa.me/249998989999" target="_blank" className="dev-link">
+                تواصل مع المطور: 0024998989999 💬
+              </a>
+            </div>
           </div>
         </div>
       </footer>
 
       {/* واتساب العائم */}
-      <a href="https://wa.me/2012883541" className="sticky-whatsapp" target="_blank">💬</a>
+      <a href="https://wa.me/249912883541" className="sticky-whatsapp" target="_blank" title="اطلب الآن">
+        💬
+      </a>
     </main>
   );
 }
