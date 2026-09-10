@@ -2,6 +2,41 @@
 
 import { useState, useEffect } from 'react';
 
+// مكون ذكي لتحميل الصور يتغلب على مشاكل حالة الأحرف في Vercel
+function SmartImage({ src, alt, className, id }) {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [attempt, setAttempt] = useState(1);
+
+  const handleError = () => {
+    if (attempt === 1) {
+      // المحاولة 2: تغيير الامتداد إلى أحرف كبيرة
+      setImgSrc(src.replace('.png', '.PNG').replace('.jpg', '.JPG'));
+      setAttempt(2);
+    } else if (attempt === 2) {
+      // المحاولة 3: تغيير الامتداد إلى أحرف صغيرة (عكس السابق)
+      setImgSrc(src.replace('.PNG', '.png').replace('.JPG', '.jpg'));
+      setAttempt(3);
+    } else {
+      // المحاولة 4: خطة أخيرة (صورة احترافية لضمان عدم كسر التصميم)
+      // ملاحظة: إذا سميت ملفاتك بشكل صحيح، لن يصل الكود إلى هنا أبداً
+      const fallbacks = [
+        'https://images.unsplash.com/photo-1499636136210-6f4391b9c433?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop'
+      ];
+      setImgSrc(fallbacks[id % fallbacks.length]);
+    }
+  };
+
+  return <img src={imgSrc} alt={alt} className={className} onError={handleError} />;
+}
+
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -34,23 +69,17 @@ export default function Home() {
     }
   }, [isDark]);
 
-  // ✅ الحل الجذري: استخدام روابط مباشرة لصور احترافية لضمان الظهور 100%
   const products = [
-    { id: 1, name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', img: 'https://images.unsplash.com/photo-1499636136210-6f4391b9c433?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب كوكيز الجنزبيل' },
-    { id: 2, name: 'بوكس السعادة', nameEn: 'Happiness Box', img: 'https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب بوكس السعادة' },
-    { id: 3, name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب بسكويت سوداني' },
-    { id: 4, name: 'معجنات فاخرة', nameEn: 'Premium Pastry', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب معجنات فاخرة' },
-    { id: 5, name: 'حلوى مميزة', nameEn: 'Special Treat', img: 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب حلوى مميزة' },
-    { id: 6, name: 'كيك فاخر', nameEn: 'Luxury Cake', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب كيك فاخر' },
-    { id: 7, name: 'خبز طازج', nameEn: 'Fresh Bread', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب خبز طازج' },
-    { id: 8, name: 'كرواسون ذهبي', nameEn: 'Golden Croissant', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب كرواسون ذهبي' },
-    { id: 9, name: 'تشكيلة راقية', nameEn: 'Luxury Collection', img: 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب التشكيلة الراقية' },
+    { id: 1, name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', msg: 'مرحباً، أريد طلب كوكيز الجنزبيل' },
+    { id: 2, name: 'بوكس السعادة', nameEn: 'Happiness Box', msg: 'مرحباً، أريد طلب بوكس السعادة' },
+    { id: 3, name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', msg: 'مرحباً، أريد طلب بسكويت سوداني' },
+    { id: 4, name: 'معجنات فاخرة', nameEn: 'Premium Pastry', msg: 'مرحباً، أريد طلب معجنات فاخرة' },
+    { id: 5, name: 'حلوى مميزة', nameEn: 'Special Treat', msg: 'مرحباً، أريد طلب حلوى مميزة' },
+    { id: 6, name: 'كيك فاخر', nameEn: 'Luxury Cake', msg: 'مرحباً، أريد طلب كيك فاخر' },
+    { id: 7, name: 'خبز طازج', nameEn: 'Fresh Bread', msg: 'مرحباً، أريد طلب خبز طازج' },
+    { id: 8, name: 'كرواسون ذهبي', nameEn: 'Golden Croissant', msg: 'مرحباً، أريد طلب كرواسون ذهبي' },
+    { id: 9, name: 'تشكيلة راقية', nameEn: 'Luxury Collection', msg: 'مرحباً، أريد طلب التشكيلة الراقية' },
   ];
-
-  const handleImageError = (e) => {
-    // خطة أخيرة احتياطية في حالة حظر أي رابط
-    e.target.src = 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&h=1000&fit=crop';
-  };
 
   return (
     <main className="main-content">
@@ -64,7 +93,7 @@ export default function Home() {
 
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
         <div className="preloader-content">
-          <img src="/logo.png" alt="Sugar Moon" className="preloader-logo" onError={handleImageError} />
+          <SmartImage src="/logo.png" alt="Sugar Moon" className="preloader-logo" id={0} />
           <div className="preloader-text">Sugar<span>moon</span></div>
           <div className="preloader-subtitle">Luxury Sudanese Bakery</div>
           <div className="preloader-line"><span></span></div>
@@ -78,7 +107,7 @@ export default function Home() {
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            <img src="/logo.png" alt="Logo" className="nav-logo-icon" onError={handleImageError} />
+            <SmartImage src="/logo.png" alt="Logo" className="nav-logo-icon" id={0} />
             <span className="nav-logo-text">Sugar<span>moon</span></span>
           </a>
           <ul className="nav-links">
@@ -162,11 +191,11 @@ export default function Home() {
           {products.map((product, index) => (
             <div key={product.id} className={`product-card reveal reveal-delay-${(index % 3) + 1}`}>
               <div className="product-image-wrapper" onClick={() => setSelectedProduct(product)}>
-                <img 
-                  src={product.img} 
+                <SmartImage 
+                  src={`/product-${product.id}.png`} 
                   alt={product.name} 
                   className="product-image"
-                  onError={handleImageError}
+                  id={product.id}
                 />
                 <div className="product-overlay">
                   <div className="overlay-content">
@@ -193,11 +222,11 @@ export default function Home() {
             <button className="modal-close" onClick={() => setSelectedProduct(null)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
-            <img 
-              src={selectedProduct.img} 
+            <SmartImage 
+              src={`/product-${selectedProduct.id}.png`} 
               alt={selectedProduct.name} 
               className="modal-image"
-              onError={handleImageError}
+              id={selectedProduct.id}
             />
             <div className="modal-divider"></div>
             <h2 className="modal-title">{selectedProduct.name}</h2>
@@ -214,7 +243,7 @@ export default function Home() {
         <div className="footer-container">
           <div className="footer-top">
             <div className="footer-brand">
-              <img src="/logo.png" alt="Logo" className="footer-logo" onError={handleImageError} />
+              <SmartImage src="/logo.png" alt="Logo" className="footer-logo" id={0} />
               <h3>Sugar<span>moon</span></h3>
               <p>نقدم لكم أرقى المخبوزات والحلويات السودانية الأصيلة، محضرة بحب وعناية فائقة لننقل لكم طعم البيت في كل لقمة.</p>
             </div>
