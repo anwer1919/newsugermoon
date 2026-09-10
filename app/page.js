@@ -2,6 +2,47 @@
 
 import { useState, useEffect } from 'react';
 
+// ✅ مكون ذكي يحاول عدة مسارات للصور تلقائياً
+function SmartImage({ imgPath, alt, className }) {
+  const [src, setSrc] = useState(imgPath);
+  const [attempt, setAttempt] = useState(0);
+  
+  const githubBase = 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public';
+  
+  // قائمة الاحتمالات التي سيحاولها المكون
+  const fallbacks = [
+    imgPath,                                              // 1. المسار الأصلي
+    imgPath.replace('.png', '.PNG').replace('.jpg', '.JPG'), // 2. امتداد كبير
+    imgPath.replace('.PNG', '.png').replace('.JPG', '.jpg'), // 3. امتداد صغير
+    `${githubBase}/fallback-${Date.now()}.png`,           // 4. محاولة أخيرة
+  ];
+
+  const handleError = () => {
+    const nextAttempt = attempt + 1;
+    if (nextAttempt < fallbacks.length) {
+      setSrc(fallbacks[nextAttempt]);
+      setAttempt(nextAttempt);
+    } else {
+      // 🎯 خطة أخيرة: صورة احترافية من Unsplash
+      const id = imgPath.match(/\d+/)?.[0] || '1';
+      const unsplashImages = [
+        'https://images.unsplash.com/photo-1499636136210-6f4391b9c433?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop',
+        'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&h=1000&fit=crop',
+      ];
+      setSrc(unsplashImages[(parseInt(id) - 1) % unsplashImages.length]);
+    }
+  };
+
+  return <img src={src} alt={alt} className={className} onError={handleError} />;
+}
+
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -34,11 +75,9 @@ export default function Home() {
     }
   }, [isDark]);
 
-  // ✅ الحل الجذري: روابط GitHub Raw المباشرة لصورك الفعلية
   const githubBase = 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public';
-  
   const logoUrl = `${githubBase}/logo.png`;
-  
+
   const products = [
     { id: 1, name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', img: `${githubBase}/product-1.png`, msg: 'مرحباً، أريد طلب كوكيز الجنزبيل' },
     { id: 2, name: 'بوكس السعادة', nameEn: 'Happiness Box', img: `${githubBase}/product-2.png`, msg: 'مرحباً، أريد طلب بوكس السعادة' },
@@ -63,7 +102,7 @@ export default function Home() {
 
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
         <div className="preloader-content">
-          <img src={logoUrl} alt="Sugar Moon" className="preloader-logo" />
+          <SmartImage imgPath={logoUrl} alt="Sugar Moon" className="preloader-logo" />
           <div className="preloader-text">Sugar<span>moon</span></div>
           <div className="preloader-subtitle">Luxury Sudanese Bakery</div>
           <div className="preloader-line"><span></span></div>
@@ -77,7 +116,7 @@ export default function Home() {
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            <img src={logoUrl} alt="Logo" className="nav-logo-icon" />
+            <SmartImage imgPath={logoUrl} alt="Logo" className="nav-logo-icon" />
             <span className="nav-logo-text">Sugar<span>moon</span></span>
           </a>
           <ul className="nav-links">
@@ -161,7 +200,8 @@ export default function Home() {
           {products.map((product, index) => (
             <div key={product.id} className={`product-card reveal reveal-delay-${(index % 3) + 1}`}>
               <div className="product-image-wrapper" onClick={() => setSelectedProduct(product)}>
-                <img src={product.img} alt={product.name} className="product-image" />
+                {/* ✅ استخدام SmartImage بدلاً من img العادي */}
+                <SmartImage imgPath={product.img} alt={product.name} className="product-image" />
                 <div className="product-overlay">
                   <div className="overlay-content">
                     <h3 className="overlay-title">{product.name}</h3>
@@ -187,7 +227,7 @@ export default function Home() {
             <button className="modal-close" onClick={() => setSelectedProduct(null)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
-            <img src={selectedProduct.img} alt={selectedProduct.name} className="modal-image" />
+            <SmartImage imgPath={selectedProduct.img} alt={selectedProduct.name} className="modal-image" />
             <div className="modal-divider"></div>
             <h2 className="modal-title">{selectedProduct.name}</h2>
             <p className="modal-subtitle">{selectedProduct.nameEn}</p>
@@ -203,7 +243,7 @@ export default function Home() {
         <div className="footer-container">
           <div className="footer-top">
             <div className="footer-brand">
-              <img src={logoUrl} alt="Logo" className="footer-logo" />
+              <SmartImage imgPath={logoUrl} alt="Logo" className="footer-logo" />
               <h3>Sugar<span>moon</span></h3>
               <p>نقدم لكم أرقى المخبوزات والحلويات السودانية الأصيلة، محضرة بحب وعناية فائقة لننقل لكم طعم البيت في كل لقمة.</p>
             </div>
