@@ -1,5 +1,5 @@
 import './globals.css';
-import { Tajawal, Playfair_Display } from 'next/font/google';
+import { Tajawal, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 
 const tajawal = Tajawal({ 
   subsets: ['arabic'],
@@ -13,15 +13,21 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-cormorant',
+});
+
 export const metadata = {
-  title: 'Sugarmoon | طعم البيت الفاخر',
-  description: 'مخبوزات وحلويات سودانية أصيلة في مصر',
+  title: 'Sugarmoon | Luxury Sudanese Bakery',
+  description: 'مخبوزات وحلويات سودانية فاخرة في مصر',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={`${tajawal.variable} ${playfair.variable}`}>
+      <body className={`${tajawal.variable} ${playfair.variable} ${cormorant.variable}`}>
         {children}
       </body>
     </html>
