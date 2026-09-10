@@ -34,20 +34,22 @@ export default function Home() {
     }
   }, [isDark]);
 
-  // ✅ الحل الجذري: روابط صور مباشرة من Unsplash - مضمونة 100%
+  // ✅ الحل الجذري: روابط GitHub Raw المباشرة لصورك الفعلية
+  const githubBase = 'https://raw.githubusercontent.com/anwer1919/newsugermoon/main/public';
+  
+  const logoUrl = `${githubBase}/logo.png`;
+  
   const products = [
-    { id: 1, name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', img: 'https://images.unsplash.com/photo-1499636136210-6f4391b9c433?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب كوكيز الجنزبيل' },
-    { id: 2, name: 'بوكس السعادة', nameEn: 'Happiness Box', img: 'https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب بوكس السعادة' },
-    { id: 3, name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب بسكويت سوداني' },
-    { id: 4, name: 'معجنات فاخرة', nameEn: 'Premium Pastry', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب معجنات فاخرة' },
-    { id: 5, name: 'حلوى مميزة', nameEn: 'Special Treat', img: 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب حلوى مميزة' },
-    { id: 6, name: 'كيك فاخر', nameEn: 'Luxury Cake', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب كيك فاخر' },
-    { id: 7, name: 'خبز طازج', nameEn: 'Fresh Bread', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب خبز طازج' },
-    { id: 8, name: 'كرواسون ذهبي', nameEn: 'Golden Croissant', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب كرواسون ذهبي' },
-    { id: 9, name: 'تشكيلة راقية', nameEn: 'Luxury Collection', img: 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&h=1000&fit=crop', msg: 'مرحباً، أريد طلب التشكيلة الراقية' },
+    { id: 1, name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', img: `${githubBase}/product-1.png`, msg: 'مرحباً، أريد طلب كوكيز الجنزبيل' },
+    { id: 2, name: 'بوكس السعادة', nameEn: 'Happiness Box', img: `${githubBase}/product-2.png`, msg: 'مرحباً، أريد طلب بوكس السعادة' },
+    { id: 3, name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', img: `${githubBase}/product-3.png`, msg: 'مرحباً، أريد طلب بسكويت سوداني' },
+    { id: 4, name: 'معجنات فاخرة', nameEn: 'Premium Pastry', img: `${githubBase}/product-4.png`, msg: 'مرحباً، أريد طلب معجنات فاخرة' },
+    { id: 5, name: 'حلوى مميزة', nameEn: 'Special Treat', img: `${githubBase}/product-5.png`, msg: 'مرحباً، أريد طلب حلوى مميزة' },
+    { id: 6, name: 'كيك فاخر', nameEn: 'Luxury Cake', img: `${githubBase}/product-6.png`, msg: 'مرحباً، أريد طلب كيك فاخر' },
+    { id: 7, name: 'خبز طازج', nameEn: 'Fresh Bread', img: `${githubBase}/product-7.png`, msg: 'مرحباً، أريد طلب خبز طازج' },
+    { id: 8, name: 'كرواسون ذهبي', nameEn: 'Golden Croissant', img: `${githubBase}/product-8.png`, msg: 'مرحباً، أريد طلب كرواسون ذهبي' },
+    { id: 9, name: 'تشكيلة راقية', nameEn: 'Luxury Collection', img: `${githubBase}/product-9.png`, msg: 'مرحباً، أريد طلب التشكيلة الراقية' },
   ];
-
-  const logoUrl = 'https://images.unsplash.com/photo-1556217477-d325251ece38?w=200&h=200&fit=crop';
 
   return (
     <main className="main-content">
@@ -69,7 +71,7 @@ export default function Home() {
       </div>
 
       <button className="theme-toggle" onClick={() => setIsDark(!isDark)} aria-label="Toggle theme">
-        {isDark ? '☀️' : ''}
+        {isDark ? '☀️' : '🌙'}
       </button>
 
       <nav className="navbar" id="navbar">
