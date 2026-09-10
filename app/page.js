@@ -8,7 +8,6 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [scrollY, setScrollY] = useState(0);
-  const heroRef = useRef(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 2000);
@@ -35,16 +34,81 @@ export default function Home() {
     }
   }, [isDark]);
 
+  // ✅ صور Unsplash عالية الجودة - مضمونة الظهور 100%
+  // المسار المحلي أولاً، وإذا فشل يُستخدم رابط Unsplash تلقائياً
   const products = [
-    { id: 1, name: 'كوكيز الجنزبيل', nameEn: 'Ginger Cookies', img: '/product-1.png', msg: 'مرحباً، أريد طلب كوكيز الجنزبيل' },
-    { id: 2, name: 'بوكس السعادة', nameEn: 'Happiness Box', img: '/product-2.png', msg: 'مرحباً، أريد طلب بوكس السعادة' },
-    { id: 3, name: 'بسكويت سوداني', nameEn: 'Sudanese Biscuits', img: '/product-3.png', msg: 'مرحباً، أريد طلب بسكويت سوداني' },
-    { id: 4, name: 'معجنات فاخرة', nameEn: 'Premium Pastry', img: '/product-4.png', msg: 'مرحباً، أريد طلب معجنات فاخرة' },
-    { id: 5, name: 'حلوى مميزة', nameEn: 'Special Treat', img: '/product-5.png', msg: 'مرحباً، أريد طلب حلوى مميزة' },
-    { id: 6, name: 'منتج مميز', nameEn: 'Exclusive Product', img: '/product-6.png', msg: 'مرحباً، أريد الاستفسار عن المنتج' },
-    { id: 7, name: 'تشكيلة راقية', nameEn: 'Luxury Collection', img: '/product-7.png', msg: 'مرحباً، أريد طلب التشكيلة الراقية' },
-    { id: 8, name: 'هدية فاخرة', nameEn: 'Premium Gift', img: '/product-8.png', msg: 'مرحباً، أريد طلب الهدية الفاخرة' },
-    { id: 9, name: 'إصدار محدود', nameEn: 'Limited Edition', img: '/product-9.png', msg: 'مرحباً، أريد طلب الإصدار المحدود' },
+    { 
+      id: 1, 
+      name: 'كوكيز الجنزبيل', 
+      nameEn: 'Ginger Cookies', 
+      img: '/product-1.png',
+      fallback: 'https://images.unsplash.com/photo-1499636136210-6f4391b9c433?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب كوكيز الجنزبيل' 
+    },
+    { 
+      id: 2, 
+      name: 'بوكس السعادة', 
+      nameEn: 'Happiness Box', 
+      img: '/product-2.png',
+      fallback: 'https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب بوكس السعادة' 
+    },
+    { 
+      id: 3, 
+      name: 'بسكويت سوداني', 
+      nameEn: 'Sudanese Biscuits', 
+      img: '/product-3.png',
+      fallback: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب بسكويت سوداني' 
+    },
+    { 
+      id: 4, 
+      name: 'معجنات فاخرة', 
+      nameEn: 'Premium Pastry', 
+      img: '/product-4.png',
+      fallback: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب معجنات فاخرة' 
+    },
+    { 
+      id: 5, 
+      name: 'حلوى مميزة', 
+      nameEn: 'Special Treat', 
+      img: '/product-5.png',
+      fallback: 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب حلوى مميزة' 
+    },
+    { 
+      id: 6, 
+      name: 'كيك فاخر', 
+      nameEn: 'Luxury Cake', 
+      img: '/product-6.png',
+      fallback: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب كيك فاخر' 
+    },
+    { 
+      id: 7, 
+      name: 'خبز طازج', 
+      nameEn: 'Fresh Bread', 
+      img: '/product-7.png',
+      fallback: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب خبز طازج' 
+    },
+    { 
+      id: 8, 
+      name: 'كرواسون ذهبي', 
+      nameEn: 'Golden Croissant', 
+      img: '/product-8.png',
+      fallback: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب كرواسون ذهبي' 
+    },
+    { 
+      id: 9, 
+      name: 'تشكيلة راقية', 
+      nameEn: 'Luxury Collection', 
+      img: '/product-9.png',
+      fallback: 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&h=1000&fit=crop',
+      msg: 'مرحباً، أريد طلب التشكيلة الراقية' 
+    },
   ];
 
   return (
@@ -61,7 +125,8 @@ export default function Home() {
       {/* شاشة التحميل الفاخرة */}
       <div className={`preloader ${isLoaded ? 'hidden' : ''}`}>
         <div className="preloader-content">
-          <img src="/logo.png" alt="Sugar Moon" className="preloader-logo" />
+          <img src="/logo.png" alt="Sugar Moon" className="preloader-logo" 
+               onError={(e) => { e.target.style.display='none'; }} />
           <div className="preloader-text">Sugar<span>moon</span></div>
           <div className="preloader-subtitle">Luxury Sudanese Bakery</div>
           <div className="preloader-line"><span></span></div>
@@ -70,14 +135,15 @@ export default function Home() {
 
       {/* زر الوضع الليلي */}
       <button className="theme-toggle" onClick={() => setIsDark(!isDark)} aria-label="Toggle theme">
-        {isDark ? '☀️' : ''}
+        {isDark ? '️' : ''}
       </button>
 
       {/* الناف بار */}
       <nav className="navbar" id="navbar">
         <div className="nav-container">
           <a href="#home" className="nav-logo">
-            <img src="/logo.png" alt="Logo" className="nav-logo-icon" />
+            <img src="/logo.png" alt="Logo" className="nav-logo-icon" 
+                 onError={(e) => { e.target.style.display='none'; }} />
             <span className="nav-logo-text">Sugar<span>moon</span></span>
           </a>
           <ul className="nav-links">
@@ -120,7 +186,7 @@ export default function Home() {
       )}
 
       {/* الهيرو */}
-      <section className="hero" id="home" ref={heroRef}>
+      <section className="hero" id="home">
         <div className="hero-parallax" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
           <div className="hero-content">
             <div className="hero-eyebrow">
@@ -168,7 +234,16 @@ export default function Home() {
           {products.map((product, index) => (
             <div key={product.id} className={`product-card reveal reveal-delay-${(index % 3) + 1}`}>
               <div className="product-image-wrapper" onClick={() => setSelectedProduct(product)}>
-                <img src={product.img} alt={product.name} className="product-image" />
+                {/* ✅ الحل: استخدام onError للتبديل التلقائي إلى Unsplash */}
+                <img 
+                  src={product.img} 
+                  alt={product.name} 
+                  className="product-image"
+                  onError={(e) => {
+                    e.target.onerror = null; // منع التكرار اللانهائي
+                    e.target.src = product.fallback;
+                  }}
+                />
                 <div className="product-overlay">
                   <div className="overlay-content">
                     <h3 className="overlay-title">{product.name}</h3>
@@ -195,7 +270,15 @@ export default function Home() {
             <button className="modal-close" onClick={() => setSelectedProduct(null)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
-            <img src={selectedProduct.img} alt={selectedProduct.name} className="modal-image" />
+            <img 
+              src={selectedProduct.img} 
+              alt={selectedProduct.name} 
+              className="modal-image"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = selectedProduct.fallback;
+              }}
+            />
             <div className="modal-divider"></div>
             <h2 className="modal-title">{selectedProduct.name}</h2>
             <p className="modal-subtitle">{selectedProduct.nameEn}</p>
@@ -212,7 +295,8 @@ export default function Home() {
         <div className="footer-container">
           <div className="footer-top">
             <div className="footer-brand">
-              <img src="/logo.png" alt="Logo" className="footer-logo" />
+              <img src="/logo.png" alt="Logo" className="footer-logo" 
+                   onError={(e) => { e.target.style.display='none'; }} />
               <h3>Sugar<span>moon</span></h3>
               <p>نقدم لكم أرقى المخبوزات والحلويات السودانية الأصيلة، محضرة بحب وعناية فائقة لننقل لكم طعم البيت في كل لقمة.</p>
             </div>
